@@ -67,9 +67,10 @@ var iiibeacon = IIIBeacon()
  
 #### Step3:
 Initialize beaconFramework and connect to server.
+Key value has to replace "YOUR_APP_KEY" by app key you got like "e36a.......".
 
 ```swift
-iiibeacon.get_beacons_withkey_security(server: "ideas.iiibeacon.net", key: "app key", completion: { (beacon_info: IIIBeacon.BeaconInfo, Sucess: Bool) in
+iiibeacon.get_beacons_withkey_security(server: "ideas.iiibeacon.net", key: "YOUR_APP_KEY", completion: { (beacon_info: IIIBeacon.BeaconInfo, Sucess: Bool) in
             if(Sucess){                
                 DispatchQueue.main.async(execute: {
                     self.detection = IIIBeaconDetection(beacon_data: beacon_info)
@@ -90,7 +91,7 @@ if (detection.ActiveBeaconList?.count)! > 0 {   //if detect more than a beacon
                         security_server:"ideas.iiibeacon.net",
                                   major: Int(item.major!)!,
                                   minor: Int(item.minor!)!,
-                                    key: "app key" ){ (completion,success)  -> () in
+                                    key: "YOUR_APP_KEY" ){ (completion,success)  -> () in
                         if(success){
                             //Create push message struct...
                         }
@@ -126,7 +127,7 @@ _notification = [IIINotification new] ;
 _iiibeacon = [IIIBeacon new];
 _detection = [IIIBeaconDetection new];
 
-[_iiibeacon get_beacons_withkey_securityWithServer:@"ideas.iiibeacon.net" key: @"app key" completion: ^(BeaconInfo *item , BOOL Sucess) {
+[_iiibeacon get_beacons_withkey_securityWithServer:@"ideas.iiibeacon.net" key: @"YOUR_APP_KEY" completion: ^(BeaconInfo *item , BOOL Sucess) {
         if (Sucess) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 _detection = [[IIIBeaconDetection alloc] initWithBeacon_data:item];
@@ -145,7 +146,7 @@ Write a program in BeaconDetectd()
 -(void)BeaconDetectd{
     if (_detection.ActiveBeaconList.count > 0) {
         for (ActiveBeacon* key in [self.detection ActiveBeaconList]) {
-                [_notification get_push_message_securityWithSecurity_server:@"ideas.iiibeacon.net" major: key.major.integerValue minor:key.minor.integerValue key:@"app key" completion:^(message *item, BOOL Sucess){
+                [_notification get_push_message_securityWithSecurity_server:@"ideas.iiibeacon.net" major: key.major.integerValue minor:key.minor.integerValue key:@"YOUR_APP_KEY" completion:^(message *item, BOOL Sucess){
                     if (Sucess) {
                         // Create push message struct...
                         NSLog(@"%@", [item.content.products[0] sellerName]);
